@@ -20,12 +20,11 @@ namespace DeliveryOrders.Server.Service
         public async Task<Guid> AddAsync(AddressAddDTO address)
         {
             AddressModel model = address.Adapt<AddressModel>();
-            CityAddDTO city = new CityAddDTO() { City = address.City };
+            CityAddDTO city = new CityAddDTO() { Name = address.CityName };
 
             model.CityId = await _cityService.AddAsync(city);
             model.Id = Guid.NewGuid();
-            await _addressRepository.AddAsync(model);
-            return model.Id;
+            return await _addressRepository.AddAsync(model);
         }
     }
 }

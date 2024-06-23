@@ -18,12 +18,12 @@ namespace DeliveryOrders.DataAccess.Configurations
 
             builder
                 .HasOne(order => order.RecipientAddress)
-                .WithMany(address => address.Orders)
+                .WithMany(address => address.RecipentOrders)
                 .HasForeignKey(order => order.RecipientAddressId);
 
             builder
                 .HasOne(order => order.SenderAddress)
-                .WithMany(address => address.Orders)
+                .WithMany(address => address.SenderOrders)
                 .HasForeignKey(order => order.SenderAddressId);
         }
     }

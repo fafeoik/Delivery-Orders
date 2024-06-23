@@ -21,9 +21,7 @@ namespace DeliveryOrders.Server.Service
             CityModel model = city.Adapt<CityModel>();
             model.Id = Guid.NewGuid();
 
-            await _cityRepository.AddAsync(model);
-
-            return model.Id;
+            return await _cityRepository.AddAsync(model);
         }
     }
 }

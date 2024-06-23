@@ -17,7 +17,7 @@ namespace DeliveryOrders.Server.DTO
         public string? RecipientAddressLine { get; set; }
 
         [Required(ErrorMessage = "Обязательное поле")]
-        [Range(0, double.MaxValue)]
+        [Range(0.1, double.MaxValue)]
         public double? CargoWeight { get; set; }
 
         [Required]

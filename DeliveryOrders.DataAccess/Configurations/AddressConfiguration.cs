@@ -19,11 +19,11 @@ namespace DeliveryOrders.DataAccess.Configurations
                 .WithMany(c => c.Addresses)
                 .HasForeignKey(a => a.CityId);
 
-            builder.HasMany(a => a.Orders)
+            builder.HasMany(a => a.RecipentOrders)
                 .WithOne(o => o.RecipientAddress)
                 .HasForeignKey(o => o.RecipientAddressId);
 
-            builder.HasMany(a => a.Orders)
+            builder.HasMany(a => a.SenderOrders)
                .WithOne(o => o.SenderAddress)
                .HasForeignKey(o => o.SenderAddressId);
         }

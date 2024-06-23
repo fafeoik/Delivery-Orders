@@ -3,6 +3,6 @@
     public class AddressAddDTO
     {
         public string? AddressLine { get; set; }
-        public string? City { get; set; }
+        public string? CityName { get; set; }
     }
 }

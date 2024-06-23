@@ -38,8 +38,8 @@ namespace DeliveryOrders.Server.Service
         {
             var orderModel = orderDTO.Adapt<OrderModel>();
 
-            AddressAddDTO recipientAddress = new AddressAddDTO() { AddressLine = orderDTO.RecipientAddressLine, City = orderDTO.RecipientCity };
-            AddressAddDTO senderAddress = new AddressAddDTO() { AddressLine = orderDTO.SenderAddressLine, City = orderDTO.SenderCity };
+            AddressAddDTO recipientAddress = new AddressAddDTO() { AddressLine = orderDTO.RecipientAddressLine, CityName = orderDTO.RecipientCity };
+            AddressAddDTO senderAddress = new AddressAddDTO() { AddressLine = orderDTO.SenderAddressLine, CityName = orderDTO.SenderCity };
 
             orderModel.RecipientAddressId = await _addressService.AddAsync(recipientAddress);
             orderModel.SenderAddressId = await _addressService.AddAsync(senderAddress);

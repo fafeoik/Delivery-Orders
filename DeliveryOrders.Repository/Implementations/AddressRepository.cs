@@ -16,9 +16,11 @@ namespace DeliveryOrders.Repository.Implementations
 
         public override async Task<Guid> AddAsync(AddressModel model)
         {
-            if (_context.Set<AddressModel>().Any(a => a.AddressLine == model.AddressLine))
+            if (_context.Set<AddressModel>().Any(a => a.AddressLine == model.AddressLine) && _context.Set<AddressModel>().Any(a => a.CityId == model.CityId))
             {
-                return _context.Set<AddressModel>().Where(a => a.AddressLine == model.AddressLine).SingleOrDefault().Id;
+                var context = _context.Set<AddressModel>();
+                var test = context.Where(a => a.AddressLine == model.AddressLine).Where(a => a.CityId == model.CityId).ToList();
+                return test.SingleOrDefault().Id;
             }
 
             await _context.Set<AddressModel>().AddAsync(model);
