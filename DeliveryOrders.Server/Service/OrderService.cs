@@ -64,14 +64,14 @@ namespace DeliveryOrders.Server.Service
 
         public async Task<bool> DeleteAsync(Guid Id)
         {
-            var accountToDelete = await _orderRepository.GetByIdAsync(Id);
+            var orderToDelete = await _orderRepository.GetByIdAsync(Id);
 
-            if (accountToDelete == null)
+            if (orderToDelete == null)
             {
                 return false;
             }
 
-            return await _orderRepository.DeleteAsync(accountToDelete);
+            return await _orderRepository.DeleteAsync(orderToDelete);
         }
     }
 }
