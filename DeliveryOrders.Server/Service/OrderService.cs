@@ -1,5 +1,8 @@
-﻿using DeliveryOrders.DataAccess.Models;
+﻿using Dadata;
+using Dadata.Model;
+using DeliveryOrders.DataAccess.Models;
 using DeliveryOrders.Repository;
+using DeliveryOrders.Server.Dadata;
 using DeliveryOrders.Server.DTO;
 using DeliveryOrders.Server.Queries;
 using DeliveryOrders.Server.Service.Interfaces;
@@ -34,9 +37,21 @@ namespace DeliveryOrders.Server.Service
             return order.Adapt<OrderGetDTO>();
         }
 
-        public async Task AddAsync(OrderPostDTO orderDTO)
+        public async Task<bool> AddAsync(OrderPostDTO orderDTO)
         {
+            orderDTO.SenderAddressLine = await AddressCleaner.CleanAddress(orderDTO.SenderAddressLine, orderDTO.SenderCity);
+            orderDTO.RecipientAddressLine = await AddressCleaner.CleanAddress(orderDTO.RecipientAddressLine, orderDTO.RecipientCity);
+
+            orderDTO.SenderCity = await AddressCleaner.CleanCity(orderDTO.SenderAddressLine, orderDTO.SenderCity);
+            orderDTO.RecipientCity = await AddressCleaner.CleanCity(orderDTO.RecipientAddressLine, orderDTO.RecipientCity);
+
+            if(orderDTO.SenderAddressLine == orderDTO.RecipientAddressLine && orderDTO.SenderCity == orderDTO.RecipientCity)
+            {
+                return false;
+            }
+
             var orderModel = orderDTO.Adapt<OrderModel>();
+            orderModel.OrderCreationDate = DateTime.UtcNow;
 
             AddressAddDTO recipientAddress = new AddressAddDTO() { AddressLine = orderDTO.RecipientAddressLine, CityName = orderDTO.RecipientCity };
             AddressAddDTO senderAddress = new AddressAddDTO() { AddressLine = orderDTO.SenderAddressLine, CityName = orderDTO.SenderCity };
@@ -46,6 +61,8 @@ namespace DeliveryOrders.Server.Service
             orderModel.Id = Guid.NewGuid();
 
             var createdId = await _orderRepository.AddAsync(orderModel);
+
+            return true;
         }
 
         public async Task<OrderGetDTO> UpdateAsync(Guid Id, OrderPutDTO order)

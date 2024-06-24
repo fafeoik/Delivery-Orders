@@ -56,8 +56,8 @@ namespace DeliveryOrders.Server.Controllers
         {
             try
             {
-                await _orderService.AddAsync(model);
-                return Ok();
+                return await _orderService.AddAsync(model) ? Ok()
+                    : StatusCode(StatusCodes.Status400BadRequest, "Адреса и города получателя и отправителя не должны совпадать");
             }
             catch (Exception)
             {

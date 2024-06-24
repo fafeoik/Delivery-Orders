@@ -4,6 +4,8 @@ using DeliveryOrders.Server.DTO;
 using DeliveryOrders.Server.Service.Interfaces;
 using Mapster;
 using System.Net;
+using Dadata;
+using Dadata.Model;
 
 namespace DeliveryOrders.Server.Service
 {

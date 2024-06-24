@@ -21,5 +21,6 @@ namespace DeliveryOrders.DataAccess.Models
         public double? CargoWeight { get; set; }
         [Required]
         public DateTime? CargoPickupDate { get; set; }
+        public DateTime? OrderCreationDate { get; set; }
     }
 }

@@ -26,6 +26,8 @@ namespace DeliveryOrders.DataAccess.Configurations
             builder.HasMany(a => a.SenderOrders)
                .WithOne(o => o.SenderAddress)
                .HasForeignKey(o => o.SenderAddressId);
+
+            builder.HasAlternateKey(a => new { a.AddressLine, a.CityId });
         }
     }
 }
