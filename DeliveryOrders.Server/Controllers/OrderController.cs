@@ -16,7 +16,7 @@ namespace DeliveryOrders.Server.Controllers
             _orderService = orderService;
         }
 
-        [HttpGet]
+        [HttpGet("getall")]
         public async Task<ActionResult<List<OrderGetDTO>>> GetAll([FromQuery] OrderQuery orderQuery) // Если нам понадобится добавить фильтрацию или поиск, мы можем добавить нужные свойства в OrderQuery и сделать фильтрацию по ним
         {
             try

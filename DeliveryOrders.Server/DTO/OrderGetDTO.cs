@@ -8,6 +8,7 @@
         public string? RecipientCity { get; set; }
         public string? RecipientAddressLine { get; set; }
         public double? CargoWeight { get; set; }
-        public DateTime CargoPickupDate { get; set; }
+        public DateOnly CargoPickupDate { get; set; }
+        public DateTimeOffset? OrderCreationDate { get; set; }
     }
 }

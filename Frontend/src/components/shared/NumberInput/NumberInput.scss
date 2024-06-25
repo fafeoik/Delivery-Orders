@@ -1,0 +1,36 @@
+@import '../../../Main.scss';
+
+@mixin num-field {
+    display: block;
+    max-width: 500px;
+    width: auto;
+    border: 1px solid rgb(175, 175, 175);
+    border-radius: 6px;
+    padding: 5px;
+}
+
+.num-field {
+    @include num-field;
+}
+
+.num-field-error {
+    @include num-field;
+    border-color: red;
+}
+
+.num-field-disabled {
+    @include num-field;
+    background-color: $grayBack;
+}
+
+.num-wrapper {
+    margin: 10px;
+}
+
+.num-field:hover {
+    background-color: $grayBack;
+}
+
+.num-field-error:hover {
+    background-color: $grayBack;
+}

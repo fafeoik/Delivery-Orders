@@ -1,0 +1,11 @@
+@import '../../Main.scss';
+
+.default-form {
+    margin-left: $defaultMargin;
+    //border: 1px solid gray;
+    //border-radius: 5px;
+}
+
+.form-inner {
+    display: flex;
+}

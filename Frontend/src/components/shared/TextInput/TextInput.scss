@@ -1,0 +1,36 @@
+@import '../../../Main.scss';
+
+@mixin text-field {
+    @include field; 
+    display: block;
+    text-align: left;
+    border-radius: 6px;
+    margin-top: 3px;
+    min-width: 400px;
+}
+
+.text-field {
+    @include text-field;
+}
+
+.text-field-disabled {
+    @include text-field;
+    background-color: $grayBack;
+}
+
+.text-field-error {
+    @include text-field;
+    border-color: red;
+}
+
+.text-field:hover {
+    background-color: $grayBack;
+}
+
+.text-field-error:hover {
+    background-color: $grayBack;
+}
+
+.text-wrapper {
+    margin: $wrapperMargin;
+}
