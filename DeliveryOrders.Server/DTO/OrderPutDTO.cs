@@ -9,6 +9,6 @@ namespace DeliveryOrders.Server.DTO
         public double? CargoWeight { get; set; }
 
         [Required]
-        public DateTime CargoPickupDate { get; set; }
+        public DateOnly CargoPickupDate { get; set; }
     }
 }
