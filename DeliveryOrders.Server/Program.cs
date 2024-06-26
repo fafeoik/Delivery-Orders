@@ -11,6 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen();
 builder.Services.RegisterMapsterConfiguration();
+
 builder.Services.AddDbContext<DataContext>(options =>
 {
     options.UseNpgsql(builder.Configuration.GetConnectionString(nameof(DataContext)));
@@ -47,5 +48,7 @@ app.UseCors();
 app.UseHttpsRedirection();
 
 app.MapControllers();
+
+await SeedData.EnsurePopulatedAsync(app);
 
 app.Run();

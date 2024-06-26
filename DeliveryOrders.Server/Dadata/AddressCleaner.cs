@@ -9,14 +9,14 @@ namespace DeliveryOrders.Server.Dadata
         {
             var api = GetApi();
 
-            //var testResult = await api.Clean<Address>(cityName + " " + addressLine);
+            var testResult = await api.Clean<Address>(cityName + " " + addressLine);
 
-            //string result = testResult.result.Substring(testResult.result.IndexOf(',') + 2);
+            string result = testResult.street_with_type + " " + testResult.house;
 
-            //if( result != null)
-            //{
-            //    return result;
-            //}
+            if (result != null)
+            {
+                return result;
+            }
 
             return addressLine;
         }
@@ -25,13 +25,17 @@ namespace DeliveryOrders.Server.Dadata
         {
             var api = GetApi();
 
-            //var address = (await api.Clean<Address>(cityName + " " + addressLine));
-            //string result = address.result.Substring(2, address.result.IndexOf(',') - 2);
+            var address = (await api.Clean<Address>(cityName + " " + addressLine));
+            string result = address.settlement;
 
-            //if (result != null)
-            //{
-            //    return result;
-            //}
+            if (result == null)
+                result = address.city;
+
+            if (result == null)
+                result = address.region;
+
+            if (result != null)
+                return result;
 
             return cityName;
         }

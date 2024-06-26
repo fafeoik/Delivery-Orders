@@ -5,7 +5,7 @@ namespace DeliveryOrders.Server.DTO
     public class OrderPostDTO
     {
         [Required(ErrorMessage = "Обязательное поле")]
-        [MaxLength(20)]
+        [MaxLength(40)]
         public string? SenderCity { get; set; }
 
         [Required(ErrorMessage = "Обязательное поле")]
@@ -13,7 +13,7 @@ namespace DeliveryOrders.Server.DTO
         public string? SenderAddressLine { get; set; }
 
         [Required(ErrorMessage = "Обязательное поле")]
-        [MaxLength(20)]
+        [MaxLength(40)]
         public string? RecipientCity { get; set; }
 
         [Required(ErrorMessage = "Обязательное поле")]

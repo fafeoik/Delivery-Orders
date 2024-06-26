@@ -11,14 +11,9 @@ namespace DeliveryOrders.DataAccess
 {
     public class DataContext(DbContextOptions<DataContext> options) : DbContext(options)
     {
-        public DbSet<OrderModel> OrderModels { get; set; }
-        public DbSet<AddressModel> AddressModels { get; set; }
-        public DbSet<CityModel> CityModels { get; set; }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            //optionsBuilder.UseSqlite("Data Source=ProductOrders.db");
-        }
+        public DbSet<OrderModel> Orders { get; set; }
+        public DbSet<AddressModel> Addresses { get; set; }
+        public DbSet<CityModel> Cities { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
