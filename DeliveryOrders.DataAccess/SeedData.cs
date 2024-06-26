@@ -8,7 +8,7 @@ namespace DeliveryOrders.DataAccess
 {
     public static class SeedData
     {
-        public static async Task EnsurePopulatedAsync(IApplicationBuilder app)
+        public static void EnsurePopulated(IApplicationBuilder app)
         {
             var context = app.ApplicationServices.CreateScope().ServiceProvider.GetRequiredService<DataContext>();
 
@@ -22,8 +22,8 @@ namespace DeliveryOrders.DataAccess
                      new CityModel { Id = Guid.NewGuid(), Name = "Кемерово" }
                 };
 
-                await context.Cities.AddRangeAsync(cities);
-                await context.SaveChangesAsync();
+                context.Cities.AddRangeAsync(cities);
+                context.SaveChangesAsync();
             }
 
             if (!context.Addresses.Any())
@@ -75,8 +75,8 @@ namespace DeliveryOrders.DataAccess
 
                 };
 
-                await context.Addresses.AddRangeAsync(addresses);
-                await context.SaveChangesAsync();
+                context.Addresses.AddRangeAsync(addresses);
+                context.SaveChangesAsync();
             }
 
             if (!context.Orders.Any())
@@ -118,8 +118,8 @@ namespace DeliveryOrders.DataAccess
                     }
                 };
 
-                await context.Orders.AddRangeAsync(orders);
-                await context.SaveChangesAsync();
+                context.Orders.AddRangeAsync(orders);
+                context.SaveChangesAsync();
             }
         }
     }

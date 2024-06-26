@@ -18,12 +18,12 @@ namespace DeliveryOrders.Server.Service
             _cityRepository = cityRepository;
         }
 
-        public async Task<Guid> AddAsync(CityAddDTO city)
+        public async Task<Guid> AddAsync(CityAddDTO cityDTO)
         {
-            CityModel model = city.Adapt<CityModel>();
-            model.Id = Guid.NewGuid();
+            CityModel cityModel = cityDTO.Adapt<CityModel>();
+            cityModel.Id = Guid.NewGuid();
 
-            return await _cityRepository.AddAsync(model);
+            return await _cityRepository.AddAsync(cityModel);
         }
     }
 }

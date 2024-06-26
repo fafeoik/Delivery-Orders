@@ -39,11 +39,11 @@ namespace DeliveryOrders.Server.Controllers
         {
             try
             {
-                var account = await _orderService.GetByIdAsync(id);
+                var accountDTO = await _orderService.GetByIdAsync(id);
 
-                return account == null
+                return accountDTO == null
                 ? NotFound()
-                : Ok(account);
+                : Ok(accountDTO);
             }
             catch (Exception)
             {
@@ -52,11 +52,11 @@ namespace DeliveryOrders.Server.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(OrderPostDTO model)
+        public async Task<IActionResult> Post(OrderPostDTO modelDTO)
         {
             try
             {
-                return await _orderService.AddAsync(model) ? Ok()
+                return await _orderService.AddAsync(modelDTO) ? Ok()
                     : StatusCode(StatusCodes.Status400BadRequest, "Адреса и города получателя и отправителя не должны совпадать");
             }
             catch (Exception)
@@ -66,11 +66,11 @@ namespace DeliveryOrders.Server.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<OrderGetDTO>> Put(Guid id, OrderPutDTO order)
+        public async Task<ActionResult<OrderGetDTO>> Put(Guid id, OrderPutDTO orderDTO)
         {
             try
             {
-                var orderToUpdate = await _orderService.UpdateAsync(id, order);
+                var orderToUpdate = await _orderService.UpdateAsync(id, orderDTO);
 
                 if (orderToUpdate != null)
                 {

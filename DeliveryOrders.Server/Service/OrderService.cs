@@ -33,17 +33,17 @@ namespace DeliveryOrders.Server.Service
 
         public async Task<OrderGetDTO> GetByIdAsync(Guid id)
         {
-            var order = await _orderRepository.GetByIdAsync(id);
-            return order.Adapt<OrderGetDTO>();
+            var orderModel = await _orderRepository.GetByIdAsync(id);
+            return orderModel.Adapt<OrderGetDTO>();
         }
 
         public async Task<bool> AddAsync(OrderPostDTO orderDTO)
         {
-            orderDTO.SenderAddressLine = await AddressCleaner.CleanAddress(orderDTO.SenderAddressLine, orderDTO.SenderCity);
-            orderDTO.RecipientAddressLine = await AddressCleaner.CleanAddress(orderDTO.RecipientAddressLine, orderDTO.RecipientCity);
+            orderDTO.SenderAddressLine = await DadataAddressCleaner.CleanAddress(orderDTO.SenderAddressLine, orderDTO.SenderCity);
+            orderDTO.RecipientAddressLine = await DadataAddressCleaner.CleanAddress(orderDTO.RecipientAddressLine, orderDTO.RecipientCity);
 
-            orderDTO.SenderCity = await AddressCleaner.CleanCity(orderDTO.SenderAddressLine, orderDTO.SenderCity);
-            orderDTO.RecipientCity = await AddressCleaner.CleanCity(orderDTO.RecipientAddressLine, orderDTO.RecipientCity);
+            orderDTO.SenderCity = await DadataAddressCleaner.CleanCity(orderDTO.SenderAddressLine, orderDTO.SenderCity);
+            orderDTO.RecipientCity = await DadataAddressCleaner.CleanCity(orderDTO.RecipientAddressLine, orderDTO.RecipientCity);
 
             if(orderDTO.SenderAddressLine == orderDTO.RecipientAddressLine && orderDTO.SenderCity == orderDTO.RecipientCity)
             {
@@ -65,14 +65,14 @@ namespace DeliveryOrders.Server.Service
             return true;
         }
 
-        public async Task<OrderGetDTO> UpdateAsync(Guid Id, OrderPutDTO order)
+        public async Task<OrderGetDTO> UpdateAsync(Guid Id, OrderPutDTO orderDTO)
         {
             var orderToUpdate = await _orderRepository.GetByIdAsync(Id);
 
             if (orderToUpdate != null)
             {
-                orderToUpdate.CargoWeight = order.CargoWeight;
-                orderToUpdate.CargoPickupDate = order.CargoPickupDate;
+                orderToUpdate.CargoWeight = orderDTO.CargoWeight;
+                orderToUpdate.CargoPickupDate = orderDTO.CargoPickupDate;
                 await _orderRepository.Update(orderToUpdate);
             }
 

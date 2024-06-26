@@ -3,15 +3,15 @@ using Dadata.Model;
 
 namespace DeliveryOrders.Server.Dadata
 {
-    public static class AddressCleaner
+    public static class DadataAddressCleaner
     {
         public static async Task<string> CleanAddress(string addressLine, string cityName)
         {
             var api = GetApi();
 
-            var testResult = await api.Clean<Address>(cityName + " " + addressLine);
+            var fullAddress = await api.Clean<Address>(cityName + " " + addressLine);
 
-            string result = testResult.street_with_type + " " + testResult.house;
+            string result = fullAddress.street_with_type + " " + fullAddress.house;
 
             if (result != null)
             {
@@ -25,14 +25,14 @@ namespace DeliveryOrders.Server.Dadata
         {
             var api = GetApi();
 
-            var address = (await api.Clean<Address>(cityName + " " + addressLine));
-            string result = address.settlement;
+            var fullAddress = (await api.Clean<Address>(cityName + " " + addressLine));
+            string result = fullAddress.settlement;
 
             if (result == null)
-                result = address.city;
+                result = fullAddress.city;
 
             if (result == null)
-                result = address.region;
+                result = fullAddress.region;
 
             if (result != null)
                 return result;

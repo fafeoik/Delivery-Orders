@@ -14,18 +14,18 @@ namespace DeliveryOrders.Repository.Implementations
         {
         }
 
-        public override async Task<Guid> AddAsync(AddressModel model)
+        public override async Task<Guid> AddAsync(AddressModel addressModel)
         {
-            if (_context.Set<AddressModel>().Any(a => a.AddressLine == model.AddressLine) && _context.Set<AddressModel>().Any(a => a.CityId == model.CityId))
+            if (_context.Set<AddressModel>().Any(a => a.AddressLine == addressModel.AddressLine) && _context.Set<AddressModel>().Any(a => a.CityId == addressModel.CityId))
             {
                 var context = _context.Set<AddressModel>();
-                var test = context.Where(a => a.AddressLine == model.AddressLine).Where(a => a.CityId == model.CityId).ToList();
+                var test = context.Where(a => a.AddressLine == addressModel.AddressLine).Where(a => a.CityId == addressModel.CityId).ToList();
                 return test.SingleOrDefault().Id;
             }
 
-            await _context.Set<AddressModel>().AddAsync(model);
+            await _context.Set<AddressModel>().AddAsync(addressModel);
             _ = await _context.SaveChangesAsync();
-            return model.Id;
+            return addressModel.Id;
         }
     }
 }
