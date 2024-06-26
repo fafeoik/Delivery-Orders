@@ -5,8 +5,6 @@ VisualStudioVersion = 17.10.34916.146
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeliveryOrders.Server", "DeliveryOrders.Server\DeliveryOrders.Server.csproj", "{96874111-19BB-4A20-82CD-8629786FA455}"
 EndProject
-Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "deliveryorders.client", "deliveryorders.client\deliveryorders.client.esproj", "{EFD77F4F-7802-40C4-8897-95799688EE8B}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeliveryOrders.DataAccess", "DeliveryOrders.DataAccess\DeliveryOrders.DataAccess.csproj", "{6040610A-46B9-47D5-906A-66C3A5A06ADC}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeliveryOrders.Repository", "DeliveryOrders.Repository\DeliveryOrders.Repository.csproj", "{93AD30CF-9125-43A0-AC52-DD14B59A237F}"
@@ -21,12 +19,6 @@ Global
 		{96874111-19BB-4A20-82CD-8629786FA455}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{96874111-19BB-4A20-82CD-8629786FA455}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{96874111-19BB-4A20-82CD-8629786FA455}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EFD77F4F-7802-40C4-8897-95799688EE8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EFD77F4F-7802-40C4-8897-95799688EE8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EFD77F4F-7802-40C4-8897-95799688EE8B}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{EFD77F4F-7802-40C4-8897-95799688EE8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EFD77F4F-7802-40C4-8897-95799688EE8B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EFD77F4F-7802-40C4-8897-95799688EE8B}.Release|Any CPU.Deploy.0 = Release|Any CPU
 		{6040610A-46B9-47D5-906A-66C3A5A06ADC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6040610A-46B9-47D5-906A-66C3A5A06ADC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6040610A-46B9-47D5-906A-66C3A5A06ADC}.Release|Any CPU.ActiveCfg = Release|Any CPU
