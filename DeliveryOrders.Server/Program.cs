@@ -49,6 +49,6 @@ app.UseHttpsRedirection();
 
 app.MapControllers();
 
-SeedData.EnsurePopulated(app);
+//SeedData.EnsurePopulated(app);
 
 app.Run();
