@@ -22,8 +22,8 @@ namespace DeliveryOrders.DataAccess
                      new CityModel { Id = Guid.NewGuid(), Name = "Кемерово" }
                 };
 
-                context.Cities.AddRangeAsync(cities);
-                context.SaveChangesAsync();
+                context.Cities.AddRange(cities);
+                context.SaveChanges();
             }
 
             if (!context.Addresses.Any())
@@ -75,8 +75,8 @@ namespace DeliveryOrders.DataAccess
 
                 };
 
-                context.Addresses.AddRangeAsync(addresses);
-                context.SaveChangesAsync();
+                context.Addresses.AddRange(addresses);
+                context.SaveChanges();
             }
 
             if (!context.Orders.Any())
@@ -118,8 +118,8 @@ namespace DeliveryOrders.DataAccess
                     }
                 };
 
-                context.Orders.AddRangeAsync(orders);
-                context.SaveChangesAsync();
+                context.Orders.AddRange(orders);
+                context.SaveChanges();
             }
         }
     }
