@@ -37,8 +37,13 @@ namespace DeliveryOrders.Server.Service
             return orderModel.Adapt<OrderGetDTO>();
         }
 
-        public async Task<bool> AddAsync(OrderPostDTO orderDTO)
+        public async Task AddAsync(OrderPostDTO orderDTO)
         {
+            if (orderDTO.CargoPickupDate < DateOnly.FromDateTime(DateTime.Now))
+            {
+                throw new InvalidOperationException();
+            }
+
             orderDTO.SenderAddressLine = await DadataAddressCleaner.CleanAddress(orderDTO.SenderAddressLine, orderDTO.SenderCity);
             orderDTO.RecipientAddressLine = await DadataAddressCleaner.CleanAddress(orderDTO.RecipientAddressLine, orderDTO.RecipientCity);
 
@@ -47,7 +52,7 @@ namespace DeliveryOrders.Server.Service
 
             if(orderDTO.SenderAddressLine == orderDTO.RecipientAddressLine && orderDTO.SenderCity == orderDTO.RecipientCity)
             {
-                return false;
+                throw new ArgumentException();
             }
 
             var orderModel = orderDTO.Adapt<OrderModel>();
@@ -61,8 +66,6 @@ namespace DeliveryOrders.Server.Service
             orderModel.Id = Guid.NewGuid();
 
             var createdId = await _orderRepository.AddAsync(orderModel);
-
-            return true;
         }
 
         public async Task<OrderGetDTO> UpdateAsync(Guid Id, OrderPutDTO orderDTO)

@@ -19,86 +19,51 @@ namespace DeliveryOrders.Server.Controllers
         [HttpGet("getall")]
         public async Task<ActionResult<List<OrderGetDTO>>> GetAll([FromQuery] OrderQuery orderQuery) // Если нам понадобится добавить фильтрацию или поиск, мы можем добавить нужные свойства в OrderQuery и сделать фильтрацию по ним
         {
-            try
-            {
-                var accounts = await _orderService.GetAllAsync(orderQuery);
+            var accounts = await _orderService.GetAllAsync(orderQuery);
 
-                return !accounts.Any()
-                ? NotFound()
-                : Ok(accounts);
-            }
-            catch (Exception)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, "There was a database failure");
-            }
+            return !accounts.Any()
+            ? throw new Exception()
+            : Ok(accounts);
         }
 
 
         [HttpGet("{id}")]
         public async Task<ActionResult<OrderGetDTO>> Get(Guid id)
         {
-            try
-            {
-                var accountDTO = await _orderService.GetByIdAsync(id);
+            var accountDTO = await _orderService.GetByIdAsync(id);
 
-                return accountDTO == null
-                ? NotFound()
-                : Ok(accountDTO);
-            }
-            catch (Exception)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, "There was a database failure");
-            }
+            return accountDTO == null
+            ? throw new KeyNotFoundException()
+            : Ok(accountDTO);
         }
 
         [HttpPost]
         public async Task<IActionResult> Post(OrderPostDTO modelDTO)
         {
-            try
-            {
-                return await _orderService.AddAsync(modelDTO) ? Ok()
-                    : StatusCode(StatusCodes.Status400BadRequest, "Адреса и города получателя и отправителя не должны совпадать");
-            }
-            catch (Exception)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, "There was a database failure");
-            }
+            await _orderService.AddAsync(modelDTO);
+            return Ok();
         }
 
         [HttpPut("{id}")]
         public async Task<ActionResult<OrderGetDTO>> Put(Guid id, OrderPutDTO orderDTO)
         {
-            try
-            {
-                var orderToUpdate = await _orderService.UpdateAsync(id, orderDTO);
+            var orderToUpdate = await _orderService.UpdateAsync(id, orderDTO);
 
-                if (orderToUpdate != null)
-                {
-                    return orderToUpdate;
-                }
-                else
-                {
-                    return NotFound($"Can't find order with Id {id}");
-                }
-            }
-            catch (Exception ex)
+            if (orderToUpdate != null)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, $"There was a database failure: {ex.Message}");
+                return orderToUpdate;
+            }
+            else
+            {
+                throw new KeyNotFoundException();
             }
         }
 
         [HttpDelete("{Id}")]
         public async Task<IActionResult> Delete(Guid Id)
         {
-            try
-            {
                 return await _orderService.DeleteAsync(Id) ? Ok()
-                : NotFound($"Can't find order with Id {Id}");
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, $"There was a database failure: {ex.Message}");
-            }
+                : throw new KeyNotFoundException();
         }
     }
 }

@@ -7,7 +7,7 @@ namespace DeliveryOrders.Server.Service.Interfaces
     {
         Task<OrderGetDTO> GetByIdAsync(Guid id);
         Task<List<OrderGetDTO>> GetAllAsync(OrderQuery orderQuery);
-        Task<bool> AddAsync(OrderPostDTO order);
+        Task AddAsync(OrderPostDTO order);
         Task<OrderGetDTO> UpdateAsync(Guid Id, OrderPutDTO order);
         Task<bool> DeleteAsync(Guid Id);
     }

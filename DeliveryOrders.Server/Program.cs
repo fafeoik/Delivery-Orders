@@ -5,6 +5,7 @@ using DeliveryOrders.Server.Service.Interfaces;
 using DeliveryOrders.Server.Service;
 using Microsoft.EntityFrameworkCore;
 using DeliveryOrders.Server.MappingConfigurations;
+using DeliveryOrders.Server.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -42,6 +43,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 app.UseCors();
 
